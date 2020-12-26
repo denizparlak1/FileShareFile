@@ -1,18 +1,8 @@
-import mysql
-from mysql import connector
+
 import os
 import boto3
 
 
-def mysqlconnectionInfo():
-    hostname = os.environ["HOSTNAME"]
-    user = os.environ["USER"]
-    password = os.environ["PASSWORD"]
-    database = os.environ["DATABASE"]
-    port = os.environ["PORT"]
-    mydb = mysql.connector.connect(host=hostname, user=user, password=password, database=database, port=port)
-
-    return mydb
 
 
 def awsconnectionInfo():
