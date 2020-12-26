@@ -5,14 +5,14 @@ from botos3.aws import AwsFunctions
 
 
 external_stylesheets = ["https://codepen.io/chriddyp/pen/bWLwgP.css"]
-server = Flask(__name__)
+app = Flask(__name__)
 
 
-@server.route('/')
+@app.route('/')
 def hello_world():
     return render_template("index.html")
 
-@server.route("/upload", methods=["POST"])
+@app.route("/upload", methods=["POST"])
 def upload():
     try:
         file = request.files["file"]
@@ -28,7 +28,7 @@ def upload():
         return error
 
 
-@server.route("/download", methods=["POST"])
+@app.route("/download", methods=["POST"])
 def dowload():
     key = request.form["key"]
     IP = request.remote_addr
@@ -36,4 +36,4 @@ def dowload():
 
 
 if __name__ == '__main__':
-    server.run()
+    app.run()
