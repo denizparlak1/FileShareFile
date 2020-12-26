@@ -3,14 +3,17 @@ from sqlalchemy import Column,Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+import pymysql
 
 
 Base = declarative_base()
-engine = create_engine('mysql://root:kmt-6895@95.9.218.53:30106/sharefile')
-Base.metadata.create_all(engine)
+engine = create_engine('mysql+pymysql://root:kmt-6895@95.9.218.53:30106/sharefile')
+engine.connect()
+
 
 
 class UploadInfo(Base):
+
     __tablename__="share_file"
 
     secret_key=Column(String(50),primary_key=True)

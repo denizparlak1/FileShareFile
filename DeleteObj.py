@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 from connection import awsconnectionInfo
 from share_file import truncateTable
