@@ -1,5 +1,6 @@
+import wget
 from botocore.exceptions import ClientError
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template,Response,send_file
 from botos3.aws import AwsFunctions
 
 
@@ -23,7 +24,8 @@ def upload():
         extension = filename.split(".")[1]
         file.save(filename)
 
-        return AwsFunctions.upload(filename, extension, delete_time, size, IP)
+        sec_key =  AwsFunctions.upload(filename, extension, delete_time, size, IP)
+        return render_template("upload.html",secret_key=sec_key)
     except ClientError as error:
         return error
 
@@ -32,8 +34,10 @@ def upload():
 def dowload():
     key = request.form["key"]
     IP = request.remote_addr
-    return AwsFunctions.download(key, IP)
 
+    file = AwsFunctions.download(key, IP)
+
+    return render_template("download.html",secret_key=file)
 
 if __name__ == '__main__':
     app.run(port=5000)
